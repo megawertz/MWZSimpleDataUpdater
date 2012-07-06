@@ -19,14 +19,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9628111C15A6344700D2414D /* SimpleDataUpdater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleDataUpdater.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9628111C15A6344700D2414D /* MWZSimpleDataUpdater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MWZSimpleDataUpdater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9628112015A6344700D2414D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9628112215A6344700D2414D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9628112415A6344700D2414D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9628112815A6344700D2414D /* SimpleDataUpdater-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleDataUpdater-Info.plist"; sourceTree = "<group>"; };
+		9628112815A6344700D2414D /* MWZSimpleDataUpdater-Info.plist */ = {isa = PBXFileReference; path = "MWZSimpleDataUpdater-Info.plist"; sourceTree = "<group>"; };
 		9628112A15A6344700D2414D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9628112C15A6344700D2414D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9628112E15A6344700D2414D /* SimpleDataUpdater-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleDataUpdater-Prefix.pch"; sourceTree = "<group>"; };
+		9628112E15A6344700D2414D /* MWZSimpleDataUpdater-Prefix.pch */ = {isa = PBXFileReference; path = "MWZSimpleDataUpdater-Prefix.pch"; sourceTree = "<group>"; };
 		9628112F15A6344700D2414D /* MWZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWZAppDelegate.h; sourceTree = "<group>"; };
 		9628113015A6344700D2414D /* MWZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MWZAppDelegate.m; sourceTree = "<group>"; };
 		9628113215A6344700D2414D /* MWZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWZViewController.h; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		9628111115A6344700D2414D = {
 			isa = PBXGroup;
 			children = (
-				9628112615A6344700D2414D /* SimpleDataUpdater */,
+				9628112615A6344700D2414D /* MWZSimpleDataUpdater */,
 				9628111F15A6344700D2414D /* Frameworks */,
 				9628111D15A6344700D2414D /* Products */,
 			);
@@ -62,7 +62,7 @@
 		9628111D15A6344700D2414D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9628111C15A6344700D2414D /* SimpleDataUpdater.app */,
+				9628111C15A6344700D2414D /* MWZSimpleDataUpdater.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,7 +77,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9628112615A6344700D2414D /* SimpleDataUpdater */ = {
+		9628112615A6344700D2414D /* MWZSimpleDataUpdater */ = {
 			isa = PBXGroup;
 			children = (
 				9628113D15A6364F00D2414D /* MWZSimpleDataUpdater.h */,
@@ -89,16 +89,17 @@
 				9628113515A6344700D2414D /* MWZViewController.xib */,
 				9628112715A6344700D2414D /* Supporting Files */,
 			);
+			name = MWZSimpleDataUpdater;
 			path = SimpleDataUpdater;
 			sourceTree = "<group>";
 		};
 		9628112715A6344700D2414D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9628112815A6344700D2414D /* SimpleDataUpdater-Info.plist */,
+				9628112815A6344700D2414D /* MWZSimpleDataUpdater-Info.plist */,
 				9628112915A6344700D2414D /* InfoPlist.strings */,
 				9628112C15A6344700D2414D /* main.m */,
-				9628112E15A6344700D2414D /* SimpleDataUpdater-Prefix.pch */,
+				9628112E15A6344700D2414D /* MWZSimpleDataUpdater-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -106,9 +107,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9628111B15A6344700D2414D /* SimpleDataUpdater */ = {
+		9628111B15A6344700D2414D /* MWZSimpleDataUpdater */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9628113A15A6344700D2414D /* Build configuration list for PBXNativeTarget "SimpleDataUpdater" */;
+			buildConfigurationList = 9628113A15A6344700D2414D /* Build configuration list for PBXNativeTarget "MWZSimpleDataUpdater" */;
 			buildPhases = (
 				9628111815A6344700D2414D /* Sources */,
 				9628111915A6344700D2414D /* Frameworks */,
@@ -118,9 +119,9 @@
 			);
 			dependencies = (
 			);
-			name = SimpleDataUpdater;
+			name = MWZSimpleDataUpdater;
 			productName = SimpleDataUpdater;
-			productReference = 9628111C15A6344700D2414D /* SimpleDataUpdater.app */;
+			productReference = 9628111C15A6344700D2414D /* MWZSimpleDataUpdater.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -132,7 +133,7 @@
 				CLASSPREFIX = MWZ;
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = 9628111615A6344700D2414D /* Build configuration list for PBXProject "SimpleDataUpdater" */;
+			buildConfigurationList = 9628111615A6344700D2414D /* Build configuration list for PBXProject "MWZSimpleDataUpdater" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -144,7 +145,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9628111B15A6344700D2414D /* SimpleDataUpdater */,
+				9628111B15A6344700D2414D /* MWZSimpleDataUpdater */,
 			);
 		};
 /* End PBXProject section */
@@ -244,9 +245,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SimpleDataUpdater/SimpleDataUpdater-Prefix.pch";
-				INFOPLIST_FILE = "SimpleDataUpdater/SimpleDataUpdater-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "SimpleDataUpdater/MWZSimpleDataUpdater-Prefix.pch";
+				INFOPLIST_FILE = "SimpleDataUpdater/MWZSimpleDataUpdater-Info.plist";
+				PRODUCT_NAME = MWZSimpleDataUpdater;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -255,9 +256,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SimpleDataUpdater/SimpleDataUpdater-Prefix.pch";
-				INFOPLIST_FILE = "SimpleDataUpdater/SimpleDataUpdater-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "SimpleDataUpdater/MWZSimpleDataUpdater-Prefix.pch";
+				INFOPLIST_FILE = "SimpleDataUpdater/MWZSimpleDataUpdater-Info.plist";
+				PRODUCT_NAME = MWZSimpleDataUpdater;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -265,7 +266,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9628111615A6344700D2414D /* Build configuration list for PBXProject "SimpleDataUpdater" */ = {
+		9628111615A6344700D2414D /* Build configuration list for PBXProject "MWZSimpleDataUpdater" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9628113815A6344700D2414D /* Debug */,
@@ -274,13 +275,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9628113A15A6344700D2414D /* Build configuration list for PBXNativeTarget "SimpleDataUpdater" */ = {
+		9628113A15A6344700D2414D /* Build configuration list for PBXNativeTarget "MWZSimpleDataUpdater" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9628113B15A6344700D2414D /* Debug */,
 				9628113C15A6344700D2414D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

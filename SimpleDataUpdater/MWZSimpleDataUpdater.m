@@ -20,6 +20,8 @@
 // Private Properties
 @property BOOL timeDependentUpdates;
 @property NSTimeInterval timeDependentUpdatesInterval;
+@property long totalDownloaded;
+@property long expectedDownloadSize;
 @property (nonatomic, weak) id<MWZSimpleDataUpdaterDelegate> delegate;
 @property (nonatomic, strong) NSMutableData *downloadData;
 
@@ -31,6 +33,8 @@
 
 @implementation MWZSimpleDataUpdater
 
+@synthesize totalDownloaded = _totalDownloaded;
+@synthesize expectedDownloadSize = _expectedDownloadSize;
 @synthesize errorStatus = _errorStatus;
 @synthesize timeDependentUpdatesInterval = _timeDependentUpdatesInterval;
 @synthesize url = _url;
@@ -44,8 +48,7 @@
     
     // Do we really do need to check with the server?
     if([self timeDependentUpdates]) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSDate *lastUpdate = (NSDate *)[defaults objectForKey:LAST_UPDATE_SETTINGS_KEY];
+        NSDate *lastUpdate = [self timeOfLastUpdate];
         
         // Do we actually have a time for the last update from NSUserDefaults
         // If not, set the current time and proceed with a check
@@ -115,12 +118,39 @@
         
         [self saveUpdateTime];
     }
+    else {
+        [self setErrorStatus:MWZUpdateErrorUpdateIntervalHasNotElapsed];
+        if ([_delegate respondsToSelector:@selector(updaterWillNotDownloadData:)]) {
+            [_delegate updaterWillNotDownloadData:self];
+        }
+    }
 }
 
 // Enable time dependent updates (this uses NSDefaults)
 -(void)enableTimeDependentUpdates:(BOOL)flag withTimeInterval:(NSTimeInterval)interval { 
     [self setTimeDependentUpdates:flag];
+
+    if(interval < 0)
+        interval = DEFAULT_UPDATE_TIMESPAN;
+    
     [self setTimeDependentUpdatesInterval:interval];
+    
+}
+
+-(BOOL)isTimeDependentUpdatesEnabled {
+    return _timeDependentUpdates;
+}
+
+-(NSDate *)timeOfLastUpdate {
+    
+    NSDate *lastUpdate = nil;
+    
+    if([self isTimeDependentUpdatesEnabled]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        lastUpdate = (NSDate *)[defaults objectForKey:LAST_UPDATE_SETTINGS_KEY];
+    }
+    
+    return lastUpdate;
 }
 
 #pragma mark - NSURLConnection Delegates 
@@ -139,8 +169,11 @@
         }
         NSMutableData *tmp = [NSMutableData data];
         [self setDownloadData:tmp];
+        [self setExpectedDownloadSize:[response expectedContentLength]];
+        [self setTotalDownloaded:0];
     }
     else if(statusCode == FAILURE_STATUS_CODE) {
+        [self setErrorStatus:MWZUpdateErrorNoNewDataAvailable];
         if ([_delegate respondsToSelector:@selector(updaterWillNotDownloadData:)]) {
             [_delegate updaterWillNotDownloadData:self];
         }
@@ -148,8 +181,8 @@
     }
     else {
         [self setErrorStatus:MWZUpdateErrorResponseCodeUnknown];
-        if ([_delegate respondsToSelector:@selector(updaterFailed:)]) {
-            [_delegate updaterFailed:self];
+        if ([_delegate respondsToSelector:@selector(updaterWillNotDownloadData:)]) {
+            [_delegate updaterWillNotDownloadData:self];
         }
         [connection cancel];
     }
@@ -158,21 +191,41 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [self setErrorStatus:MWZUpdateErrorTransmissionDisrupted];
-    if ([_delegate respondsToSelector:@selector(updaterFailed:)]) {
-        [_delegate updaterFailed:self];
+    if ([_delegate respondsToSelector:@selector(updaterWillNotDownloadData:)]) {
+        [_delegate updaterWillNotDownloadData:self];
     }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    self.totalDownloaded += [data length];
     [[self downloadData] appendData:data];
+   
+    if ([_delegate respondsToSelector:@selector(updater:didUpdateDownloadProgress:)]) {
+        
+        float progress = 0.0;
+        // If no content length is sent in headers, expectedDownloadSize should == -1
+        if([self expectedDownloadSize] >= 0)
+        {
+            progress = ((double)_totalDownloaded/_expectedDownloadSize);
+        }        
+        
+        [_delegate updater:self didUpdateDownloadProgress:progress];
+    }
+    
 }
-
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if ([_delegate respondsToSelector:@selector(updater:didFinishDownloadingData:)]) {
         [_delegate updater:self didFinishDownloadingData:[self downloadData]];
     }
 
+}
+
+-(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
+    
+    // Add code here to respond to a redirect if necessary
+    // If a redirect is required just allow it by returning the request argument
+    return request;
 }
 
 

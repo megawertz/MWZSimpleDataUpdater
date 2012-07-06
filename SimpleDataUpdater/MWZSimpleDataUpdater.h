@@ -14,15 +14,16 @@
 @optional
 -(void)updaterWillDownloadData:(MWZSimpleDataUpdater *)updater;
 -(void)updaterWillNotDownloadData:(MWZSimpleDataUpdater *)updater;
--(void)updaterFailed:(MWZSimpleDataUpdater *)updater;
 -(void)updater:(MWZSimpleDataUpdater *)updater didFinishDownloadingData:(NSData *)data;
+-(void)updater:(MWZSimpleDataUpdater *)updater didUpdateDownloadProgress:(float)progress;
 @end
 
 // Error status
-
 enum {
     MWZUpdateErrorResponseCodeUnknown,
     MWZUpdateErrorTransmissionDisrupted,
+    MWZUpdateErrorNoNewDataAvailable,
+    MWZUpdateErrorUpdateIntervalHasNotElapsed,
     MWZUpdateErrorNone
 };
 
@@ -30,7 +31,7 @@ typedef NSInteger MWZUpdateErrorStatus;
 
 @interface MWZSimpleDataUpdater : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
-// Properties
+// Public Properties
 @property (nonatomic, retain) NSURL *url;
 @property MWZUpdateErrorStatus errorStatus;
 
@@ -43,5 +44,9 @@ typedef NSInteger MWZUpdateErrorStatus;
 
 // Enable time dependent updates (this uses NSDefaults for now)
 -(void)enableTimeDependentUpdates:(BOOL)flag withTimeInterval:(NSTimeInterval)interval;
+-(BOOL)isTimeDependentUpdatesEnabled;
+
+// Returns nil if time dependent updates are not enabled or no previous update has been run
+-(NSDate *)timeOfLastUpdate;
 
 @end
