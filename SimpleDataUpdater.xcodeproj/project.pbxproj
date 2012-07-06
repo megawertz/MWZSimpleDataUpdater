@@ -15,6 +15,7 @@
 		9628113115A6344700D2414D /* MWZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9628113015A6344700D2414D /* MWZAppDelegate.m */; };
 		9628113415A6344700D2414D /* MWZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9628113315A6344700D2414D /* MWZViewController.m */; };
 		9628113715A6344700D2414D /* MWZViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9628113515A6344700D2414D /* MWZViewController.xib */; };
+		9628113F15A6364F00D2414D /* MWZSimpleDataUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9628113E15A6364F00D2414D /* MWZSimpleDataUpdater.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		9628113215A6344700D2414D /* MWZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWZViewController.h; sourceTree = "<group>"; };
 		9628113315A6344700D2414D /* MWZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MWZViewController.m; sourceTree = "<group>"; };
 		9628113615A6344700D2414D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MWZViewController.xib; sourceTree = "<group>"; };
+		9628113D15A6364F00D2414D /* MWZSimpleDataUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWZSimpleDataUpdater.h; sourceTree = "<group>"; };
+		9628113E15A6364F00D2414D /* MWZSimpleDataUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWZSimpleDataUpdater.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 		9628112615A6344700D2414D /* SimpleDataUpdater */ = {
 			isa = PBXGroup;
 			children = (
+				9628113D15A6364F00D2414D /* MWZSimpleDataUpdater.h */,
+				9628113E15A6364F00D2414D /* MWZSimpleDataUpdater.m */,
 				9628112F15A6344700D2414D /* MWZAppDelegate.h */,
 				9628113015A6344700D2414D /* MWZAppDelegate.m */,
 				9628113215A6344700D2414D /* MWZViewController.h */,
@@ -164,6 +169,7 @@
 				9628112D15A6344700D2414D /* main.m in Sources */,
 				9628113115A6344700D2414D /* MWZAppDelegate.m in Sources */,
 				9628113415A6344700D2414D /* MWZViewController.m in Sources */,
+				9628113F15A6364F00D2414D /* MWZSimpleDataUpdater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
