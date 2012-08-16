@@ -7,7 +7,6 @@
 //
 
 #import "MWZAppDelegate.h"
-
 #import "MWZViewController.h"
 
 @implementation MWZAppDelegate

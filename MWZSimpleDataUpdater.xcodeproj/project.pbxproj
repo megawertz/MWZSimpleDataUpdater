@@ -23,10 +23,10 @@
 		9628112015A6344700D2414D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9628112215A6344700D2414D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9628112415A6344700D2414D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9628112815A6344700D2414D /* MWZSimpleDataUpdater-Info.plist */ = {isa = PBXFileReference; path = "MWZSimpleDataUpdater-Info.plist"; sourceTree = "<group>"; };
+		9628112815A6344700D2414D /* MWZSimpleDataUpdater-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MWZSimpleDataUpdater-Info.plist"; sourceTree = "<group>"; };
 		9628112A15A6344700D2414D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9628112C15A6344700D2414D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9628112E15A6344700D2414D /* MWZSimpleDataUpdater-Prefix.pch */ = {isa = PBXFileReference; path = "MWZSimpleDataUpdater-Prefix.pch"; sourceTree = "<group>"; };
+		9628112E15A6344700D2414D /* MWZSimpleDataUpdater-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MWZSimpleDataUpdater-Prefix.pch"; sourceTree = "<group>"; };
 		9628112F15A6344700D2414D /* MWZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWZAppDelegate.h; sourceTree = "<group>"; };
 		9628113015A6344700D2414D /* MWZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MWZAppDelegate.m; sourceTree = "<group>"; };
 		9628113215A6344700D2414D /* MWZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWZViewController.h; sourceTree = "<group>"; };

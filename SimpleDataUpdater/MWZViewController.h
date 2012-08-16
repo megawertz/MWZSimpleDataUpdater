@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *dlImage;
 @property (weak, nonatomic) IBOutlet UISwitch *dlTimeToggle;
 @property (weak, nonatomic) IBOutlet UILabel *dlTimeLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *dlVerifyToggle;
 
 - (IBAction)download:(id)sender;
 - (IBAction)switchToggled:(id)sender;

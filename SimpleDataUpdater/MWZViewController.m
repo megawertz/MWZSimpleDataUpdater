@@ -8,13 +8,12 @@
 
 #import "MWZViewController.h"
 
-#define DOWNLOAD_SCRIPT_URL @"http://domain.com/script"
+#define DOWNLOAD_SCRIPT_URL @"http://yourappname.appspot.com/downloader"
 #define DOWNLOAD_TIME_INTERVAL 30
 #define QUERY_KEY @"v"
-#define QUERY_VALUE @"20"
+#define QUERY_VALUE @"0"
 
 @interface MWZViewController ()
-
 @end
 
 @implementation MWZViewController
@@ -24,11 +23,16 @@
 @synthesize dlImage;
 @synthesize dlTimeToggle;
 @synthesize dlTimeLabel;
+@synthesize dlVerifyToggle;
 
 #pragma mark - MWZSimpleDataUpdaterDelegateMethods
 
 -(void)updaterWillDownloadData:(MWZSimpleDataUpdater *)updater {
-    [self.dlStatus setText:@"Available"];
+    
+    if([dlVerifyToggle isOn])
+        [self.dlStatus setText:@"Verified"];
+    else
+        [self.dlStatus setText:@"Available"];
 }
 
 -(void)updaterWillNotDownloadData:(MWZSimpleDataUpdater *)updater {
@@ -39,6 +43,9 @@
     if([updater errorStatus] == MWZUpdateErrorUpdateIntervalHasNotElapsed)
         [self.dlStatus setText:@"Too Soon"];
 
+    if([updater errorStatus] == MWZUpdateErrorDataNotVerified)
+        [self.dlStatus setText:@"Data Not Verified."];
+    
     if([updater errorStatus] == MWZUpdateErrorResponseCodeUnknown ||
        [updater errorStatus] == MWZUpdateErrorTransmissionDisrupted)
         [self.dlStatus setText:@"Error"];
@@ -46,8 +53,10 @@
 }
 
 -(void)updater:(MWZSimpleDataUpdater *)updater didFinishDownloadingData:(NSData *)data {
+    NSLog(@"Size of Download: %d",[data length]);
     UIImage *image = [UIImage imageWithData:data];
     [self.dlImage setImage:image];
+    
 }
 
 -(void)updater:(MWZSimpleDataUpdater *)updater didUpdateDownloadProgress:(float)progress {
@@ -72,6 +81,7 @@
     [self setDlImage:nil];
     [self setDlTimeToggle:nil];
     [self setDlTimeLabel:nil];
+    [self setDlVerifyToggle:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -83,17 +93,21 @@
 
 - (IBAction)download:(id)sender {
 
-    // Lazy load this, no need for this to persist?
+    // Lazy load this, no need for this to persist
     NSURL *url = [NSURL URLWithString:DOWNLOAD_SCRIPT_URL];
+    
     MWZSimpleDataUpdater *updater = [[MWZSimpleDataUpdater alloc] initWithURL:url andDelegate:self];
 
-    [updater enableTimeDependentUpdates:[dlTimeToggle isOn] withTimeInterval:DOWNLOAD_TIME_INTERVAL];
+    [updater verifyDownload:[dlVerifyToggle isOn] withDownloadHost:nil];
+    
+    [updater setTimeDependentUpdates:[dlTimeToggle isOn] withTimeInterval:DOWNLOAD_TIME_INTERVAL];
     
     [updater updateWithKey:QUERY_KEY andValue:QUERY_VALUE];
   
 }
 
 - (IBAction)switchToggled:(id)sender {
+    
     NSString *tmp = @"-";
     if([dlTimeToggle isOn])
     {

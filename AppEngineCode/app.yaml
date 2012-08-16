@@ -1,0 +1,15 @@
+application: yourappname
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /static
+  mime_type: application/octet-stream
+  static_dir: static
+  secure: always
+
+- url: /.*
+  script: test.app
+  secure: always
