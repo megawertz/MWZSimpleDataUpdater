@@ -8,6 +8,7 @@
 
 #import "MWZSimpleDataUpdater.h"
 #import <CommonCrypto/CommonDigest.h>
+#import <sys/utsname.h>
 
 #define DEFAULT_UPDATE_TIMESPAN     60 * 60 * 24 * 1 // 1 day
 #define LAST_UPDATE_SETTINGS_KEY    @"MWZLastUpdateCheck"         
@@ -30,6 +31,9 @@
 
 // Private Methods
 -(NSString *)md5FromData:(NSData *)data;
+// Generate all data to be sent to server
+// TODO: Let the user pass-in the values to be logged
+-(NSString *)generateDeviceInformationQueryString;
 @end
 
 @implementation MWZSimpleDataUpdater
@@ -45,6 +49,7 @@
 @synthesize fileHash = _fileHash;
 @synthesize fileDownloadHost = _fileDownloadHost;
 @synthesize verifyDownload = _verifyDownload;
+@synthesize sendDeviceInformation = _sendDeviceInformation;
 
 #pragma mark - Private Helper Methods
 
@@ -62,6 +67,33 @@
             ];
     
 }
+
+-(NSString *)generateDeviceInformationQueryString {
+    
+    
+    // Get Device ID
+    struct utsname systemInfo;
+    uname(&systemInfo);    
+    NSString *deviceVersion = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+   
+    // Get OS Version
+    NSString *osVersion = [[UIDevice currentDevice] systemVersion];
+
+    // Get Vendor Identifier (iOS 6 and above only)
+    NSString *vendorID = nil;
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)])
+        [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    
+    // Get current app version
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
+    // currentDBVersion is required by updateWithKey:andValue: and not defined here.
+    // This string is appended to the normal update URL below.
+    NSString *deviceInfoQuery = [NSString stringWithFormat:@"&deviceVersion=%@&osVersion=%@&appVersion=%@&vendorId=%@",deviceVersion,osVersion,appVersion,vendorID];
+    return deviceInfoQuery;
+}
+
 
 #pragma mark - Public Methods
 
@@ -134,7 +166,10 @@
     
     if([self shouldUpdate])
     {
-        NSString *urlWithParameters = [NSString stringWithFormat:@"%@?%@=%@",[self url], key, value];
+        NSMutableString *urlWithParameters = [NSMutableString stringWithFormat:@"%@?%@=%@",[self url], key, value];
+        
+        if(self.sendDeviceInformation)
+            [urlWithParameters appendString:[self generateDeviceInformationQueryString]];
         
         NSURL *fullURL = [NSURL URLWithString:[urlWithParameters stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
@@ -280,7 +315,6 @@
         // Get the headers
         NSHTTPURLResponse *r = (NSHTTPURLResponse *)response;
         NSDictionary *redirectHeaders = [r allHeaderFields];
-        
         // Get the URL we are actually going to for verification against where we think we are going
         NSString *urlString = [redirectHeaders objectForKey:@"Location"];
         NSURL *fullURL = [NSURL URLWithString:urlString];

@@ -1,5 +1,15 @@
 # MWZSimpleDataUpdater
 
+### Update in 1.2.0
+
+* Set sendDeviceInformation to YES to enable data about the user's device to be sent to the server for logging.
+* Keys and values sent are as follows.
+	* deviceVersion - This is Apple's internal hardware version of the device sending the request in the format x,x
+	* osVersion - The version of iOS the user is running
+	* appVersion - The version of your app the user is currently running (CFBundleShortVersionString)
+	* vendor ID - This is only reported on iOS 6 and above. It uses the identifierForVendor property of UIDevice.
+* Please note that the app engine Python scripts in the root of the project directory are not yet up to date to support the parsing and saving of this data.
+
 ### Overview
 
 MWZSimpleDataUpdater is a class that manages the request for and download of a single resource for an iPhone app. The class is essentially an abstraction of NSURLConnection and its delegates with a few convenience methods for updating a single resource in your app such as an SQLite or plist file. 

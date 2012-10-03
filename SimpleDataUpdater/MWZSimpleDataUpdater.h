@@ -39,6 +39,7 @@ typedef NSInteger MWZUpdateErrorStatus;
 @property (nonatomic, weak) id<MWZSimpleDataUpdaterDelegate> delegate;
 @property MWZUpdateErrorStatus errorStatus;
 @property (readonly) BOOL timeDependentUpdates; // Must be set with interval
+@property BOOL sendDeviceInformation;
 
 // Initilizers
 -(id)initWithURL:(NSURL *)url andDelegate:(id<MWZSimpleDataUpdaterDelegate>)delegate;

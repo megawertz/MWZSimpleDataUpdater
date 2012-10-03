@@ -8,7 +8,7 @@
 
 #import "MWZViewController.h"
 
-#define DOWNLOAD_SCRIPT_URL @"http://yourappname.appspot.com/downloader"
+#define DOWNLOAD_SCRIPT_URL @"https://yourappname.appspot.com/downloader"
 #define DOWNLOAD_TIME_INTERVAL 30
 #define QUERY_KEY @"v"
 #define QUERY_VALUE @"0"
@@ -53,7 +53,6 @@
 }
 
 -(void)updater:(MWZSimpleDataUpdater *)updater didFinishDownloadingData:(NSData *)data {
-    NSLog(@"Size of Download: %d",[data length]);
     UIImage *image = [UIImage imageWithData:data];
     [self.dlImage setImage:image];
     
@@ -98,6 +97,8 @@
     
     MWZSimpleDataUpdater *updater = [[MWZSimpleDataUpdater alloc] initWithURL:url andDelegate:self];
 
+    [updater setSendDeviceInformation:YES];
+    
     [updater verifyDownload:[dlVerifyToggle isOn] withDownloadHost:nil];
     
     [updater setTimeDependentUpdates:[dlTimeToggle isOn] withTimeInterval:DOWNLOAD_TIME_INTERVAL];
